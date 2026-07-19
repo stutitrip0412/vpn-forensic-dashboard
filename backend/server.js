@@ -1,6 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
-
+console.log("CORS_ORIGIN =", process.env.CORS_ORIGIN);
 const app = require('./app');
 const connectDB = require('./config/db');
 
