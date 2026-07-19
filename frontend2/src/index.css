@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-bg text-text-hi;
+  }
+  body {
+    @apply font-sans antialiased;
+  }
+  ::selection {
+    @apply bg-accent/30 text-text-hi;
+  }
+  /* Visible keyboard focus everywhere — never suppressed */
+  :focus-visible {
+    outline: 2px solid theme('colors.accent.DEFAULT');
+    outline-offset: 2px;
+  }
+  code,
+  .font-data {
+    @apply font-mono;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
