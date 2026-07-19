@@ -17,9 +17,24 @@ const app = express();
 
 // --- Security & parsing middleware ---
 app.use(helmet()); // HTTP header hardening (NFR Security)
+const allowedOrigins = (
+  process.env.CORS_ORIGIN ||
+  "http://localhost:5173"
+)
+  .split(",")
+  .map((o) => o.trim());
+
 app.use(
   cors({
-    origin: (process.env.CORS_ORIGIN || '').split(',').filter(Boolean),
+    origin(origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
